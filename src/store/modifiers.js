@@ -9,7 +9,7 @@ export const modifiers = [
   { name: 'Медкарта - Услуги', value: 2 },
   { name: 'Медкарта - Планы лечения', value: 2 },
   { name: 'Медкарта - Протоколы', value: 3 },
-  { name: 'Медкарта - СЭМД', value: 1 },
+  { name: 'Медкарта - СЭМД', value: 1.5 },
   { name: 'Задачи', value: 1.5 },
   { name: 'Маркетинг', value: 2 },
   { name: 'Коммуникации', value: 1.5 },
