@@ -8,7 +8,7 @@
     <span class="mirror-text">{{ isCameraEnabled ? 'Выключить' : 'Включить' }} зеркало</span>
   </button>
   <div class="content">
-    <h1 class="title">Sprint Point Calculator 9000</h1>
+    <h1 class="title">Sprint Points Calculator 9000</h1>
     <div class="sprint-point-calculator">
       <table v-if="rows.length" class="data-table">
         <thead>
