@@ -4,10 +4,15 @@ export class TableRowAPI {
   modifier = ''
   taskCost = 0
   modValue = 1
+  count = 1
+
+  editable = false
 
   resetTask () {
     this.task = ''
     this.taskCost = 0
+    this.count = 1
+    this.editable = false
   }
 
   resetModifier () {
@@ -21,6 +26,8 @@ export class TableRowAPI {
     this.modifier = tableRow.modifier
     this.taskCost = tableRow.taskCost
     this.modValue = tableRow.modValue
+    this.count = tableRow.count
+    this.editable = tableRow.editable
 
     return this
   }

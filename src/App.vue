@@ -6,6 +6,7 @@
       <tr>
         <th>Вид работы</th>
         <th>Модификатор</th>
+        <th>Кол-во</th>
         <th></th>
         <th></th>
         <th></th>
@@ -46,7 +47,7 @@ const rows = ref([new TableRowAPI()]);
 
 const totalCost = computed(() => Math.ceil(
   rows.value.reduce((sum, row) => {
-    return sum + row.taskCost * row.modValue;
+    return sum + row.taskCost * row.modValue * row.count;
   }, 0))
 );
 

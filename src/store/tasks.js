@@ -1,4 +1,7 @@
+export const customTask =   { name: 'Настраиваемый', cost: 0, editable: true }
+
 export const tasks = [
+  customTask,
   { name: 'Исправление текста (тултип, подпись итп) (10 шт)', cost: 0.5 },
   { name: 'Замена иконок (10 шт)', cost: 0.5 },
   { name: 'Небольшой фикс стилей: выравнивание, цвет итд', cost: 0.5 },

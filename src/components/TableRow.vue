@@ -1,19 +1,39 @@
 <template>
   <tr>
-    <td>
-      <input
-        list="task-list"
-        :value="row.task"
-        @input="onSetTask($event.target.value)"
-      />
-      <datalist id="task-list">
-        <option
-          v-for="task in tasks"
-          :key="task.name"
-          :value="`${task.cost}::${task.name}`"
+    <td class="row-task">
+      <div>
+        <input
+            list="task-list"
+            :value="row.task"
+            @input="onSetTask($event.target.value)"
         />
-      </datalist>
-      <button @click="row.resetTask()">x</button>
+        <datalist id="task-list">
+          <option
+              v-for="task in tasks"
+              :key="task.name"
+              :value="`${task.cost}::${task.name}`"
+          />
+        </datalist>
+        <button @click="row.resetTask()">x</button>
+      </div>
+
+      <!-- Настраиваемая задача -->
+      <div class="row-task__custom" v-if="row.editable" style="padding-left: 10px">
+        <p>
+          <label>
+            <span class="label__text">Работа:</span>
+            <input v-model="row.task">
+            <button @click="onSetTask('0::Настраиваемый')">x</button>
+          </label>
+        </p>
+        <p>
+          <label>
+            <span class="label__text">Цена:</span>
+            <input type="number" v-model.number="row.taskCost" min="0">
+            <button @click="row.taskCost = 0">x</button>
+          </label>
+        </p>
+      </div>
     </td>
     <td>
       <input
@@ -29,6 +49,9 @@
         />
       </datalist>
       <button @click="row.resetModifier()">x</button>
+    </td>
+    <td class="row-count">
+      <input type="number" min="1" v-model.number="row.count">
     </td>
     <td class="row-sum">
       {{ rowSum }}
@@ -56,13 +79,14 @@ const props = defineProps({
 })
 
 const rowSum = computed(() => {
-  return props.row.taskCost * (props.row.modValue || 1);
+  return props.row.taskCost * (props.row.modValue || 1) * (props.row.count || 1);
 })
 
 function onSetTask(rawValue) {
-  const [cost] = rawValue.split("::");
+  const [cost, name] = rawValue.split("::");
   props.row.task = rawValue;
   props.row.taskCost = +cost || 0;
+  props.row.editable = name === 'Настраиваемый';
 }
 
 function onSetModifier(rawValue) {
@@ -73,6 +97,10 @@ function onSetModifier(rawValue) {
 </script>
 
 <style scoped>
+tr:nth-child(2n) {
+  background-color: #f5f5f5;
+}
+
 input[list="task-list"] {
   width: 350px;
 }
@@ -83,5 +111,22 @@ td {
 
 td.row-sum {
   width: 40px;
+}
+
+td.row-count {
+  max-width: 60px;
+}
+
+td.row-count > input {
+  max-width: 60px;
+}
+
+td {
+  vertical-align: top;
+}
+
+.label__text {
+  display: inline-block;
+  min-width: 60px;
 }
 </style>
